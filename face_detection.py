@@ -19,7 +19,7 @@ eye_cascade3 = cv2.CascadeClassifier('./data/haarcascade_righteye_2splits.xml')
 pos = './images/positive'
 neg = './images/negetive'
 num = 0
-not_detect = 0
+not_detect = 1
 op = 0
 eye_left = ()
 eye_right = ()
@@ -38,13 +38,15 @@ while True:
     if (ret):
         faces = face_cascade2.detectMultiScale(gray, 1.3, 5,minSize=(200,200))
         if (faces == ()):
-            not_detect = 0
+            not_detect = 1
             faces = face_cascade5.detectMultiScale(gray, 1.3, 5,minSize=(200,200))
             if (faces != ()) :
+                not_detect = 0
+            else :
                 not_detect = 1
         else : 
-            not_detect = 1
-        if (not_detect != 0) :    
+            not_detect = 0
+        if (not_detect == 0) :    
             for (x,y,w,h) in faces:
                 cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
                 roi_gray_left = gray[y:y+h, x+w/2:x+w]
@@ -66,17 +68,18 @@ while True:
     gray_ret, gray_canny_binary = cv2.threshold(gray_canny, 50,255, cv2.THRESH_OTSU) 
     gray_canny = cv2.Canny(gray_canny, 70, 150)
     
-    if (not_detect!=1) :
+    op = 0
+    if (not_detect == 0) :
         if (eye_left != ()) :
             roi_eye_left_canny = roi_eye_left.copy()
             roi_eye_left_canny_ret, roi_eye_left_canny_b = cv2.threshold(roi_eye_left_canny, 50,255, cv2.THRESH_OTSU) 
             roi_eye_left_canny_e = cv2.Canny(roi_eye_left_canny_b, 70, 150)            
-            cv2.imshow('roi_eye_left_canny', roi_eye_left_canny_e)
+            cv2.imshow('roi_eye_left_canny', roi_eye_left_canny_b)
         if (eye_right != ()) :
             roi_eye_right_canny = roi_eye_right.copy()
             roi_eye_right_canny_ret, roi_eye_right_canny_b = cv2.threshold(roi_eye_right_canny, 50,255, cv2.THRESH_OTSU) 
             roi_eye_right_canny_e = cv2.Canny(roi_eye_right_canny_b, 70, 150)
-            cv2.imshow('roi_eye_right_canny', roi_eye_right_canny_e)
+            cv2.imshow('roi_eye_right_canny', roi_eye_right_canny_b)
 
 
 
