@@ -20,7 +20,6 @@ if not cap.isOpened():
     sys.exit()
 
 net = cv2.dnn.readNet(model, config)
-eye_classifier = cv2.CascadeClassifier('haarcascade_eye.xml')
 if net.empty():
     print('Net open failed!')
     sys.exit()
@@ -54,10 +53,10 @@ while True:
         w = x2 - x1
         x = x1
         y = y1
-        roi_gray_left = gray[y:y+h, x+w/2:x+w]
-        roi_gray_right = gray[y:y+h, x:x+w/2]
-        roi_color_left = frame[y:y+(h/2)+20, x+w/2:x+w]
-        roi_color_right = frame[y:y+(h/2)+20, x:x+w/2]
+        roi_gray_left = gray[y:y+h, (int)(x+w/2):x+w]
+        roi_gray_right = gray[y:y+h, x:x+(int)(w/2)]
+        roi_color_left = frame[y:y+(int)(h/2)+20, x+(int)(w/2):x+w]
+        roi_color_right = frame[y:y+(int)(h/2)+20, x:x+(int)(w/2)]
     if range(detect.shape[0])>0 :
         print('a')
         eye_left = eye_cascade2.detectMultiScale(roi_gray_left,1.3,5,minSize=(20,20))
@@ -66,11 +65,11 @@ while True:
         print(eye_left)
         print(eye_right)
         for(ex, ey, ew, eh) in eye_left:
-            cv2.rectangle(roi_color_left,(ex,ey+ey/3),(ex+ew,ey+eh),(0,255,0),2)
-            roi_eye_left = roi_gray_left[ey+ey/3: ey+eh, ex:ex+ew]
+            cv2.rectangle(roi_color_left,(ex,(int)(ey+ey/3)),(ex+ew,ey+eh),(0,255,0),2)
+            roi_eye_left = roi_gray_left[ey+(int)(ey/3): ey+eh, ex:ex+ew]
         for(ex, ey, ew, eh) in eye_right:
-            cv2.rectangle(roi_color_right,(ex,ey+ey/3),(ex+ew,ey+eh),(0,255,0),2)
-            roi_eye_right = roi_gray_right[ey+ey/3: ey+eh, ex:ex+ew]
+            cv2.rectangle(roi_color_right,(ex,(int)(ey+ey/3)),(ex+ew,ey+eh),(0,255,0),2)
+            roi_eye_right = roi_gray_right[ey+(int)(ey/3): ey+eh, ex:ex+ew]
     print('p')
     cv2.imshow('frame', frame)
     k = cv2.waitKey(1)
