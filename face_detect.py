@@ -11,40 +11,111 @@ eye_cascade1 = cv2.CascadeClassifier('./data/haarcascade_eye_tree_eyeglasses.xml
 eye_cascade2 = cv2.CascadeClassifier('./data/haarcascade_lefteye_2splits.xml')
 eye_cascade3 = cv2.CascadeClassifier('./data/haarcascade_righteye_2splits.xml')
 
-cap = cv2.VideoCapture(2)
+model_yolo = './data/yolov3-tiny.weights'
+config_yolo = './data/yolov3-tiny.cfg'
+class_labels = './data/coco.names'
+confThreshold = 0.352
+nmsThreshold = 0.4
 
+cap = cv2.VideoCapture(0)
+#init
 eye_det_l = 0
 eye_det_r = 0
 frame_num = 0
 sum_l_rev = 0
 sum_r_rev = 0
 
-sleep_value=50
-
 eyeDet_nRcnt=0
 eyeDet_nLcnt=0
+
+sleep_value=50
 
 if not cap.isOpened():
     print('Camera open failed!')
     sys.exit()
 
+##yolo_net read
+net_yolo = cv2.dnn.readNet(model_yolo, config_yolo)
+if net_yolo.empty():
+    print('Net open failed!')
+    sys.exit()
+
+classes = []
+with open(class_labels, 'rt') as f:
+    classes = f.read().rstrip('\n').split('\n')
+colors = np.random.uniform(0, 255, size=(len(classes), 3))
+
+layer_names = net_yolo.getLayerNames()
+output_layers = [layer_names[i[0] - 1] for i in net_yolo.getUnconnectedOutLayers()]
+
+#dnn_net read
 net = cv2.dnn.readNet(model, config)
 if net.empty():
     print('Net open failed!')
     sys.exit()
 
+
 while True:
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
     if not ret:
         break
+    
+    ##yolo blob img
+    blob_yolo = cv2.dnn.blobFromImage(frame, 1/255., (320, 320), swapRB=True)
+    net_yolo.setInput(blob_yolo)
+    outs_yolo = net_yolo.forward(output_layers)
+    h, w = frame.shape[:2]
+
+    class_ids = []
+    confidences = []
+    boxes = []
+    
+    #dnn blob img
     blob = cv2.dnn.blobFromImage(frame, 1, (300, 300), (104, 177, 123))
     net.setInput(blob)
     out = net.forward()
 
     detect = out[0, 0, :, :]
     (h, w) = frame.shape[:2]
+
+    #yolo detection
+    for out in outs_yolo:
+        for detection in out:
+            scores = detection[5:]
+            class_id = np.argmax(scores)
+            confidence_yolo = scores[class_id]
+            if confidence_yolo > confThreshold:
+                cx = int(detection[0] * w)
+                cy = int(detection[1] * h)
+                bw = int(detection[2] * w)
+                bh = int(detection[3] * h)
+
+                sx = int(cx - bw / 2)
+                sy = int(cy - bh / 2)
+
+                boxes.append([sx, sy, bw, bh])
+                confidences.append(float(confidence_yolo))
+                class_ids.append(int(class_id))
+
+    indices = cv2.dnn.NMSBoxes(boxes, confidences, confThreshold, nmsThreshold)
+
+    #yolo cell  phone detection
+    for i in indices:
+        i = i[0]
+        if classes[class_ids[i]] == 'cell phone' :
+            sx, sy, bw, bh = boxes[i]
+            label = '{0}: {1:.2f}'.format(classes[class_ids[i]],confidences[i])
+            color = colors[class_ids[i]]
+            cv2.rectangle(frame, (sx, sy, bw, bh), color, 2)
+            cv2.putText(frame, label, (sx, sy - 10),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2, cv2.LINE_AA)
+    t, _ = net_yolo.getPerfProfile()
+    label = 'Inference time: %.2f ms' % (t * 1000.0 / cv2.getTickFrequency())
+    cv2.putText(frame, label, (10, 30), cv2.FONT_HERSHEY_SIMPLEX,
+                0.7, (0, 0, 255), 1, cv2.LINE_AA)
+
+    #dnn face detection
     op = 1
     for i in range(detect.shape[0]):
         confidence = detect[i, 2]
@@ -65,7 +136,9 @@ while True:
         roi_gray_right = gray[y:y+h, x:x+(int)(w/2)]
         roi_color_left = frame[y:y+(int)(h/2)+20, x+(int)(w/2):x+w]
         roi_color_right = frame[y:y+(int)(h/2)+20, x:x+(int)(w/2)]
-    if op == 0 :
+
+    #eyedetection
+    if not op :
         eye_left = eye_cascade2.detectMultiScale(roi_gray_left,1.3,5,minSize=(20,20))
         eye_right = eye_cascade3.detectMultiScale(roi_gray_right,1.3,5,minSize=(20,20))
         for(ex, ey, ew, eh) in eye_left:
@@ -74,13 +147,10 @@ while True:
         for(ex, ey, ew, eh) in eye_right:
             cv2.rectangle(roi_color_right,(ex,(int)(ey+ey/6)),(ex+ew,ey+eh),(0,255,0),2)
             roi_eye_right = roi_gray_right[ey+(int)(ey/6): ey+eh, ex:ex+ew]
-
-    if op == 0 :
         if (eye_left != ()) :
             roi_eye_left_canny = roi_eye_left.copy()
             roi_eye_left_canny_ret, roi_eye_left_canny_b = cv2.threshold(roi_eye_left_canny, 50,255, cv2.THRESH_BINARY) 
             roi_eye_left_canny_e = cv2.Canny(roi_eye_left_canny, 70, 150)
-            # roi_eye_left_canny_e = cv2.Laplacian(roi_eye_left_canny, cv2.CV_32F)
             roi_eye_left_canny_ret, roi_eye_left_canny_e = cv2.threshold(roi_eye_left_canny_e, 50,255, cv2.THRESH_BINARY) 
             eye_det_l = 1
             if (str(type(roi_eye_left_canny_b)) != "<type 'NoneType'>"):
@@ -88,12 +158,11 @@ while True:
             else :
                 eye_det_l = 0
                 eyeDet_nLcnt+=1
-
+        #get_eye_edge
         if (eye_right != ()) :
             roi_eye_right_canny = roi_eye_right.copy()
             roi_eye_right_canny_ret, roi_eye_right_canny_b = cv2.threshold(roi_eye_right_canny, 50,250, cv2.THRESH_BINARY) 
             roi_eye_right_canny_e = cv2.Canny(roi_eye_right_canny, 70, 150)
-            # roi_eye_right_canny_e = cv2.Laplacian(roi_eye_right_canny, cv2.CV_32F)
             roi_eye_right_canny_ret, roi_eye_right_canny_e = cv2.threshold(roi_eye_right_canny_e, 50,255, cv2.THRESH_BINARY) 
             eye_det_r = 1
             if (str(type(roi_eye_right_canny_e)) != "<type 'NoneType'>"):
@@ -102,6 +171,7 @@ while True:
                 eye_det_r = 0
                 eyeDet_nRcnt+=1
 
+    #sleep detection
     if eye_det_l == 1 :
         sum_l = 0
         if (str(type(roi_eye_left_canny_e)) != "<type 'NoneType'>"):
@@ -112,7 +182,6 @@ while True:
                     sum_l += roi_eye_left_canny_e[i][j]/255
     else :
         sum_l = 0
-    
     if eye_det_r == 1 :
         sum_r = 0
         if (str(type(roi_eye_right_canny_e)) != "<type 'NoneType'>"):
@@ -123,6 +192,8 @@ while True:
                     sum_r += roi_eye_right_canny_e[i][j]/255
     else :
         sum_r = 0
+
+
 
     if not op :
         if (frame_num<10):
@@ -143,6 +214,9 @@ while True:
         print("can't search face")
 
 
+
+
+    #initial value
     eye_det_l = 0
     eye_det_r = 0
     roi_eye_left_canny_b = 0
