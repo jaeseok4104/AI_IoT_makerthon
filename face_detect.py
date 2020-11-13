@@ -5,8 +5,6 @@ import cv2
 
 model = './data/res10_300x300_ssd_iter_140000_fp16.caffemodel'
 config = './data/deploy.prototxt'
-#model = 'opencv_face_detector/opencv_face_detector_uint8.pb'
-#config = 'opencv_face_detector/opencv_face_detector.pbtxt'
 
 eye_cascade = cv2.CascadeClassifier('./data/haarcascade_eye.xml')
 eye_cascade1 = cv2.CascadeClassifier('./data/haarcascade_eye_tree_eyeglasses.xml')
@@ -34,7 +32,6 @@ while True:
 
     if not ret:
         break
-    # frame = cv2.flip(frame,1)
     blob = cv2.dnn.blobFromImage(frame, 1, (300, 300), (104, 177, 123))
     net.setInput(blob)
     out = net.forward()
@@ -64,9 +61,6 @@ while True:
     if op == 0 :
         eye_left = eye_cascade2.detectMultiScale(roi_gray_left,1.3,5,minSize=(20,20))
         eye_right = eye_cascade3.detectMultiScale(roi_gray_right,1.3,5,minSize=(20,20))
-        # print(x,y,h,w)
-        # print(eye_left)
-        # print(eye_right)
         for(ex, ey, ew, eh) in eye_left:
             # cv2.rectangle(roi_color_left,(ex,(int)(ey+ey/6)),(ex+ew,ey+eh),(0,255,0),2)
             roi_eye_left = roi_gray_left[ey+(int)(ey/6): ey+eh, ex:ex+ew]
