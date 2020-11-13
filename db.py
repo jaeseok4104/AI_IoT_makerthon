@@ -7,7 +7,7 @@ cursor.execute("select * from collect_data")
 sql = "INSERT INTO collect_data(TextData, LastUpdate) VALUES ('studystart', NOW())"
 cursor.execute(sql)
 conn.commit()
-time.sleep(600)
+
 
 sql = "INSERT INTO collect_data(TextData, LastUpdate) VALUES ('studyfinish', NOW())"
 cursor.execute(sql)
