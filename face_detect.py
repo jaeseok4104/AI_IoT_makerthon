@@ -11,12 +11,14 @@ eye_cascade1 = cv2.CascadeClassifier('./data/haarcascade_eye_tree_eyeglasses.xml
 eye_cascade2 = cv2.CascadeClassifier('./data/haarcascade_lefteye_2splits.xml')
 eye_cascade3 = cv2.CascadeClassifier('./data/haarcascade_righteye_2splits.xml')
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 
 eye_det_l = 0
 eye_det_r = 0
 frame_num = 0
 sum_l_rev = 0
+sum_r_rev = 0
+
 if not cap.isOpened():
     print('Camera open failed!')
     sys.exit()
@@ -62,10 +64,10 @@ while True:
         eye_left = eye_cascade2.detectMultiScale(roi_gray_left,1.3,5,minSize=(20,20))
         eye_right = eye_cascade3.detectMultiScale(roi_gray_right,1.3,5,minSize=(20,20))
         for(ex, ey, ew, eh) in eye_left:
-            # cv2.rectangle(roi_color_left,(ex,(int)(ey+ey/6)),(ex+ew,ey+eh),(0,255,0),2)
+            cv2.rectangle(roi_color_left,(ex,(int)(ey+ey/6)),(ex+ew,ey+eh),(0,255,0),2)
             roi_eye_left = roi_gray_left[ey+(int)(ey/6): ey+eh, ex:ex+ew]
         for(ex, ey, ew, eh) in eye_right:
-            # cv2.rectangle(roi_color_right,(ex,(int)(ey+ey/6)),(ex+ew,ey+eh),(0,255,0),2)
+            cv2.rectangle(roi_color_right,(ex,(int)(ey+ey/6)),(ex+ew,ey+eh),(0,255,0),2)
             roi_eye_right = roi_gray_right[ey+(int)(ey/6): ey+eh, ex:ex+ew]
 
     if op == 0 :
@@ -89,14 +91,16 @@ while True:
             if (str(type(roi_eye_right_canny_e)) != "<type 'NoneType'>"):
                 cv2.imshow('roi_eye_right_canny', roi_eye_right_canny_e)
             else :
-                eye_det_l = 0
+                eye_det_r = 0
+
     if eye_det_l == 1 :
         sum_l = 0
         if (str(type(roi_eye_left_canny_e)) != "<type 'NoneType'>"):
             height, width = roi_eye_left_canny_e.shape
         for i in range(0,height) :
             for j in range(0,width) :
-                sum_l += roi_eye_left_canny_e[i][j]/255
+                if (str(type(roi_eye_left_canny_e)) != "<type 'NoneType'>"):
+                    sum_l += roi_eye_left_canny_e[i][j]/255
     else :
         sum_l = 0
     
@@ -110,16 +114,26 @@ while True:
                     sum_r += roi_eye_right_canny_e[i][j]/255
     else :
         sum_r = 0
-    if (frame_num<20):
-        sum_l_rev += sum_l
-        frame_num+=1
-    else : 
-        frame_num = 0
-        sum_l_rev/=20
-        if (sum_l_rev<30) :
-            print('sleep')
-        else :
-            print('dont sleep')
+
+    if not op :
+        if (frame_num<20):
+            sum_r_rev += sum_r
+            sum_l_rev += sum_l
+            frame_num+=1
+        else : 
+            frame_num = 0
+            sum_r_rev/=20
+            sum_l_rev/=20
+            if ((sum_r_rev<50) and (sum_l_rev<50)) :
+                print('sleep')
+            else :
+                print('dont sleep')
+            print('sum_l_rev = {0:>4d}, sum_r_rev = {1:>4d}'.format(sum_l_rev, sum_r_rev))
+        print('sum_l = {0:>4d}, sum_r = {1:>4d}'.format(sum_l, sum_r))
+    else :
+        print("can't search face")
+
+
     eye_det_l = 0
     eye_det_r = 0
     roi_eye_left_canny_b = 0
@@ -128,7 +142,6 @@ while True:
     roi_eye_right_canny_b = 0
     roi_eye_right_canny_e = 0
     roi_eye_right_canny_ret = 0
-    print('sum_l = {0:>4d}, sum_r = {0:>4d}'.format(sum_l,sum_r))
     cv2.imshow('frame', frame)
     k = cv2.waitKey(30)
     if k == ord('q'):
