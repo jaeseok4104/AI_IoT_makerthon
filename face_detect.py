@@ -17,7 +17,7 @@ class_labels = './data/coco.names'
 confThreshold = 0.352
 nmsThreshold = 0.4
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 #init
 eye_det_l = 0
 eye_det_r = 0
@@ -155,9 +155,9 @@ while True:
             eye_det_l = 1
             if (str(type(roi_eye_left_canny_b)) != "<type 'NoneType'>"):
                 cv2.imshow('roi_eye_left_canny', roi_eye_left_canny_e)
-            else :
-                eye_det_l = 0
-                eyeDet_nLcnt+=1
+        else:
+            eye_det_l = 0
+            eyeDet_nLcnt+=1
         #get_eye_edge
         if (eye_right != ()) :
             roi_eye_right_canny = roi_eye_right.copy()
@@ -167,10 +167,9 @@ while True:
             eye_det_r = 1
             if (str(type(roi_eye_right_canny_e)) != "<type 'NoneType'>"):
                 cv2.imshow('roi_eye_right_canny', roi_eye_right_canny_e)
-            else :
-                eye_det_r = 0
-                eyeDet_nRcnt+=1
-
+        else :
+            eye_det_r = 0
+            eyeDet_nRcnt+=1
     #sleep detection
     if eye_det_l == 1 :
         sum_l = 0
@@ -196,12 +195,15 @@ while True:
 
 
     if not op :
-        if (frame_num<10):
+        if (frame_num<9):
             sum_r_rev += sum_r
             sum_l_rev += sum_l
             frame_num+=1
-        else : 
+        else :
+            sum_r_rev += sum_r
+            sum_l_rev += sum_l 
             frame_num = 0
+
             sum_r_rev/=(10-eyeDet_nRcnt)
             sum_l_rev/=(10-eyeDet_nLcnt)
             if ((sum_r_rev<sleep_value) and (sum_l_rev<sleep_value)) :
@@ -209,6 +211,9 @@ while True:
             else :
                 print('dont sleep')
             print('sum_l_rev = {0:>d}, sum_r_rev = {1:>4d}'.format(sum_l_rev, sum_r_rev))
+            # print('eyeDet_nLcnt = {0:>d}, eyeDet_nRcnt = {1:>4d}'.format(eyeDet_nLcnt, eyeDet_nRcnt))
+            eyeDet_nLcnt = 0
+            eyeDet_nRcnt = 0
         print('sum_l = {0:>4d}, sum_r = {1:>4d}'.format(sum_l, sum_r))
     else :
         print("can't search face")
