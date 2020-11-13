@@ -1,0 +1,209 @@
+참고링크
+
+유튜브
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+//Home Automation using NodeMCU and Google Assistant | Voice Activated | Blynk, IFTTT, Arduino IDE
+https://www.youtube.com/watch?v=5SvRolROPxA 
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+구글
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+//Raspberry Pi Publishing MQTT Messages to ESP8266
+https://randomnerdtutorials.com/raspberry-pi-publishing-mqtt-messages-to-esp8266/
+
+//라즈베리파이 mqtt 예제1
+https://randomnerdtutorials.com/raspberry-pi-publishing-mqtt-messages-to-esp8266/
+
+// 라즈베리파이 mqtt 예제 2
+https://blog.naver.com/codingspecialist/221052750818
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+구글 어시스턴스 관련
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+//구글어시스턴스 가상환경 키는 코드
+https://blog.naver.com/PostView.nhn?blogId=cosmosjs&logNo=221514849845&categoryNo=83&parentCategoryNo=0
+
+// 참고자료1
+https://diy-project.tistory.com/91?category=742713
+
+//참고자료2
+https://blog.naver.com/hsh07260
+
+// shell에서 stt하는방법
+https://openlearn.kr/m/0/0B3jugS8pC4
+
+//stt 구글 음성인식 API Sample코드 with 라즈베리파이
+https://blog.naver.com/PostView.nhn?blogId=chandong83&logNo=220773230509&categoryNo=65&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView
+
+// 구글 어시스턴스로 led제어하는 방법 구글홈
+https://developers.google.com/assistant/sdk/guides/library/python/extend/handle-device-commands
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+stt 하는방법
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// stt 참고자료 1
+https://webnautes.tistory.com/1247
+
+// stt 참고자료 2
+https://blog.naver.com/chandong83/220773230509
+
+// stt 참고자료 3
+https://blog.naver.com/chandong83/221299295629
+
+// stt 참고자료 4
+https://blog.naver.com/chandong83/220826470486
+
+// stt 참고자료 5
+https://blog.naver.com/chandong83/220773230509
+
+// stt 참고자료 6
+https://webnautes.tistory.com/1247
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+스피커,마이크 설정 관련
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+https://github.com/HUST-Robot/Capstone-design/issues/13
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+gps
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// gps 데이터시트
+https://wiki.52pi.com/index.php/USB-Port-GPS_Module_SKU:EZ-0048
+
+// module gps 해결관련
+https://stackoverflow.com/questions/28358712/python-gpsd-library-import-configuration
+
+// bad magic number in 'application': b'\x03\xf3\r\n': ImportError #854 오류해결관련
+https://github.com/Miserlou/Zappa/issues/854
+
+// gps 설정방법 및 증명서받는법
+https://haeyeonlab.wordpress.com/2019/12/11/2019-12-11-how-can-we-get-the-gps-data-with-raspberry-pi/
+
+// gpsd 끄는 코드
+https://learn.adafruit.com/adafruit-ultimate-gps-on-the-raspberry-pi/setting-everything-up
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+opencv 설치가이드
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+//opencv 4.1.2
+https://webnautes.tistory.com/916
+
+// PI카메라 설정
+https://webnautes.tistory.com/1192
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+opencv-졸음감지
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// 맥에서 졸음감지 및 눈깜박임 수
+https://www.pyimagesearch.com/2017/04/24/eye-blink-detection-opencv-python-dlib/
+
+// 참고자료1
+https://www.pyimagesearch.com/2017/10/23/raspberry-pi-facial-landmarks-drowsiness-detection-with-opencv-and-dlib/
+
+// 참고자료2
+https://github.com/akshaybahadur21/Drowsiness_Detection/blob/master/Drowsiness_Detection.py
+
+// 참고자료3
+https://github.com/woorimlee/drowsiness-detection/blob/master/drowsiness_detector.py
+
+// 조명 관련
+https://t9t9.com/60
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+부팅시 가상환경 및 파이썬파일 키는법
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// 부팅하고 바로 가상환경 키는법
+https://www.pyimagesearch.com/2016/05/16/running-a-python-opencv-script-on-reboot/
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+opencv-pip설치파일
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// dlib 설치하는법
+https://www.pyimagesearch.com/2017/03/27/how-to-install-dlib/
+https://www.pyimagesearch.com/2017/05/01/install-dlib-raspberry-pi/
+
+// dlib 빠르게 설치하는법
+https://www.youtube.com/watch?v=uF4aDdxBm_M
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+python 메일보내기
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+https://yeolco.tistory.com/93?category=757620
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+mysql
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+//시간값 db에 넣기
+https://motolies.com/457
+
+//테이블초기화
+https://m.blog.naver.com/PostView.nhn?blogId=newyasin&logNo=220292132524&proxyReferer=https:%2F%2Fwww.google.com%2F
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+mysql - php - android
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// 안드로이드 및 mysql 1
+https://www.skysilk.com/blog/2018/how-to-connect-an-android-app-to-a-mysql-database/
+
+// 안드로이드 및 mysql 2
+https://kostrian.tistory.com/14
+
+//php-json1
+https://ilbbang.tistory.com/entry/mysql-DB-%EB%82%B4%EC%9A%A9%EC%9D%84-php%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%98%EC%97%AC-json-%ED%98%95%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0
+
+//php-json2
+https://smith3015.blogspot.com/2012/06/mysql-json-return-php.html
+
+//php 사용 예제
+https://randomnerdtutorials.com/raspberry-pi-apache-mysql-php-lamp-server/
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+pytorch 설치
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+//그나마 최신버전
+https://github.com/lucas-coutinho/pytorch-1.5-compiled-to-raspberry
+
+//풀로 설치하는법인거같은데 하지말것
+https://gist.github.com/akaanirban/621e63237e63bb169126b537d7a1d979
+
+//이걸로 pytorch 다운받기
+https://sites.google.com/view/steam-for-vision/raspberry-pi/PytorchRP4
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+졸음검출 추가
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+//tensorFlow다운
+https://www.tensorflow.org/install/pip?hl=ko
+
+//opencv기술 여러개
+https://github.com/vardanagarwal/Proctoring-AI
+
+//eye-tracking 설명
+https://towardsdatascience.com/real-time-eye-tracking-using-opencv-and-dlib-b504ca724ac6
+https://medium.com/@stepanfilonov/tracking-your-eyes-with-python-3952e66194a6
+
+//케스케이드 눈으로 눈검출1
+https://datascienceplus.com/face-and-eye-detection-with-opencv/
+
+//케스케이드 눈으로 눈검출2
+https://medium.com/@stepanfilonov/tracking-your-eyes-with-python-3952e66194a6
+
+//졸음검출논문
+http://www.dbpia.co.kr/pdf/pdfView?nodeId=NODE06739474
+file:///C:/Users/%EA%B8%B8%ED%83%9C%ED%98%95/Downloads/7-7.pdf
+https://patentimages.storage.googleapis.com/35/80/ae/0c9131da0e2c74/KR20160115119A.pdf
+http://www.ndsl.kr/ndsl/commons/util/ndslOriginalView.do?cn=JAKO201624238397397&oCn=JAKO201624238397397&dbt=JAKO&journal=NJOU00559124
+https://www.hindawi.com/journals/acisc/2018/1439312/
+https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE02336895
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+docker 설치 및 텐서플로우 다운
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// docker 다운
+https://phoenixnap.com/kb/docker-on-raspberry-pi
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
