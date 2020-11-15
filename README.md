@@ -2,7 +2,7 @@ AI & IoT Makerthon
 ===================
 Face Detection
 ----------------
-using algorithm : DNN(Face), Haar(Eye), canny edge(Sleep estimation)
+using algorithm : DNN(Face), Haar(Eye), canny edge(Sleep estimation) 
 using system : RPi4 or ubuntu 18.04 PC
 
 Cell Phone Detection
