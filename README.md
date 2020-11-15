@@ -1,19 +1,23 @@
 AI & IoT Makerthon
 ===================
-얼굴인식
+Face Detection
 ----------------
-DNN, Haar, canny edge
+using algorithm : DNN(Face), Haar(Eye), canny edge(Sleep estimation)
+using system : RPi4 or ubuntu 18.04 PC
 
-핸드폰검출
+Cell Phone Detection
 ----------------
-yolo
+Model : Yolo v3-Tiny 
 
-
-DB
+DB and Server
 ----------------
-mysql
+mysql and Apachi
 
 
-센서보드
+Embedded System
 ---------------
-아두이노
+arduino, RPi4(LCD Controll)
+
+Result
+-------
+Win! hosted by GIST
