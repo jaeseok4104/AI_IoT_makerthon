@@ -21,3 +21,6 @@ arduino, RPi4(LCD Controll)
 Result
 -------
 Win! hosted by GIST
+
+### Experience
+[![Watch the video](https://img.youtube.com/vi/ODIgfEjcCvs/maxresdefault.jpg)](https://youtu.be/ODIgfEjcCvs)
