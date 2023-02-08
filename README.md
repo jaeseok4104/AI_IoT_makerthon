@@ -26,4 +26,4 @@ Win! hosted by GIST
 [![Watch the video](https://img.youtube.com/vi/ODIgfEjcCvs/maxresdefault.jpg)](https://youtu.be/ODIgfEjcCvs)
 
 ### Report 
-https://kpuackr-my.sharepoint.com/:p:/g/personal/2016142020_kpu_ac_kr/EXIsSgvEe0lBhynFWycFa-8BfPa58lfflywL-8P3-9G_BA?e=NzhqJx
+https://kpuackr-my.sharepoint.com/:p:/g/personal/2016142020_tukorea_ac_kr/EXIsSgvEe0lBhynFWycFa-8BEts92QapA1XICXXTLy324w?e=FwKekZ
